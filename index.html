@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Password Generator</title>
+  <style>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: blueviolet;
+  }
+
+  #container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #0056b3;
+  }
+
+  h1 {
+    font-size: 24px;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  label {
+    display: inline-block;
+    margin-top: 10px;
+
+  }
+
+  input[type="number"] {
+    width: 50px;
+    height: 30px;
+  }
+
+  button {
+    margin-top: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  p#password {
+    margin-top: 10px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+</style>
+
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Password Generator</h1>
+    <p>Customize your password options:</p>
+    <label for="length">Password Length: </label>
+    <input type="number" id="length" min="1" value="12"><br>
+  
+    <input type="checkbox" id="uppercase" checked>
+    <label for="uppercase">Include Uppercase Letters</label><br>
+  
+    <input type="checkbox" id="lowercase" checked>
+    <label for="lowercase">Include Lowercase Letters</label><br>
+  
+    <input type="checkbox" id="digits" checked>
+    <label for="digits">Include Digits</label><br>
+  
+    <input type="checkbox" id="special" checked>
+    <label for="special">Include Special Characters</label><br>
+
+    <button id="generate">Generate Password</button><br>
+    <p id="password"></p>
+  </div>
+  <script>
+    // Function to generate a random password
+    function generatePassword() {
+      const length = document.getElementById("length").value;
+      const uppercase = document.getElementById("uppercase").checked;
+      const lowercase = document.getElementById("lowercase").checked;
+      const digits = document.getElementById("digits").checked;
+      const special = document.getElementById("special").checked;
+  
+      const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+      const digitChars = '0123456789';
+      const specialChars = '!@#$%^&*';
+  
+      let charset = '';
+      if (uppercase) charset += uppercaseChars;
+      if (lowercase) charset += lowercaseChars;
+      if (digits) charset += digitChars;
+      if (special) charset += specialChars;
+  
+      if (charset === '') {
+        alert("Please select at least one character set.");
+        return;
+      }
+  
+      let password = '';
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * charset.length);
+        password += charset.charAt(randomIndex);
+      }
+  
+      document.getElementById("password").textContent = password;
+    }
+  
+    document.getElementById("generate").addEventListener("click", generatePassword);
+  </script>
+  
+
+</body>
+</html>
